@@ -1,6 +1,17 @@
 package dzr.hanom.data;
 
 public enum Gadgets {
-    Планшет, Смартфон
+    TABLET("Планшет"),
+    SMARTPHONE("Смартфон");
+    private final String desc;
+
+    Gadgets(String desc) {
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
 
 }

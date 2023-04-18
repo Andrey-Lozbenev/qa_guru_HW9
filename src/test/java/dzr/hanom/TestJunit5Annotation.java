@@ -19,6 +19,7 @@ import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static dzr.hanom.data.Gadgets.TABLET;
 
 
 public class TestJunit5Annotation {
@@ -54,21 +55,19 @@ public class TestJunit5Annotation {
 
     static Stream<Arguments> siteShouldContainsAllOfGivenAppsName() {
         return Stream.of(
-                Arguments.of(Gadgets.Планшет, GadgetsType.iPad, List.of("Браузер", "Auto.ru", "Почта", "Навигатор", "Карты",
+                Arguments.of(TABLET, GadgetsType.IPAD, List.of("Браузер", "Auto.ru", "Почта", "Навигатор", "Карты",
                         "Метро", "Переводчик", "Диск", "Кинопоиск", "Толока", "Заправки", "Букмейт")),
-                Arguments.of(Gadgets.Планшет, GadgetsType.Android, List.of("Браузер", "Auto.ru", "Почта", "Навигатор", "Карты",
+                Arguments.of(TABLET, GadgetsType.ANDROID, List.of("Браузер", "Auto.ru", "Почта", "Навигатор", "Карты",
                         "Переводчик", "Диск", "Виджет Яндекса", "Толока", "Заправки", "Букмейт"))
         );
     }
-
-    ;
 
     @MethodSource()
     @ParameterizedTest(name = "При выборе устройства {0} и операционной системы {1} отображаются приложения {2}")
     void siteShouldContainsAllOfGivenAppsName(Gadgets gadgets, GadgetsType gadgetsType, List<String> apps) {
         open("https://mobile.yandex.ru/");
-        $(".header__menu").$(byText(gadgets.name())).click();
-        $(".header").$(byText(gadgetsType.name())).click();
+        $(".header__menu").$(byText(gadgets.getDesc())).click();
+        $(".header").$(byText(gadgetsType.getDesc())).click();
         $$(".description-card__title").shouldHave(texts(apps));
     }
 

@@ -1,5 +1,17 @@
 package dzr.hanom.data;
 
 public enum GadgetsType {
-    Android, iPad
+    ANDROID("Android"),
+    IPAD("iPad");
+    private final String desc;
+
+    GadgetsType(String desc) {
+
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+
+        return desc;
+    }
 }
